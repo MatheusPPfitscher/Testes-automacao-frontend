@@ -1,11 +1,8 @@
 package tests;
 
-import PageObjects.HomePage;
-import PageObjects.LoginPage;
-import PageObjects.SearchPage;
+import PageObjects.*;
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
-import org.openqa.selenium.By;
 import utils.Browser;
 import utils.Utils;
 
@@ -39,11 +36,9 @@ public class SetupTest extends BaseTests {
         assertTrue(Browser.getCurrentDriver().getCurrentUrl()
                 .contains(Utils.getBaseUril().concat("index.php?controller=my-account")));
         System.out.println("Validou a url de minha conta");
-        assertTrue(Browser.getCurrentDriver().findElement(By.className("page-heading"))
-                .getText().contains("MY ACCOUNT"));
+        assertTrue(login.isInMyAccountPage());
         System.out.println("Validou Minha Conta no site");
     }
-
     @Test
     public void testSearch(){
         String quest = "DRESS";
@@ -51,12 +46,45 @@ public class SetupTest extends BaseTests {
         //iniciar páginas
         HomePage home = new HomePage();
         SearchPage search = new SearchPage();
-
         home.doSearch(quest);
-
         assertTrue(search.isSearchPage());
         assertEquals(search.getTextLighter(),quest);
 //        assertEquals(search.getTextHeading_counter(),"7 results have been found");
         assertThat(search.getTextHeading_counter(), CoreMatchers.containsString(questResultQtd));
+    }
+
+    @Test
+    public void testAccessCategoryTShirts(){
+        HomePage home = new HomePage();
+        CategoryPage category = new CategoryPage();
+        home.clickCaregoryTShirts();
+        assertTrue(category.isPageTShirts());
+    }
+
+    @Test
+    public void testAccessOneProductPageInTShirts(){
+        testAccessCategoryTShirts();
+        CategoryPage category = new CategoryPage();
+        ProductPage productPage = new ProductPage();
+
+        String nameProductCategory = category.getProductNameCategory();
+        category.clickProductAddToProductPage();
+        assertTrue(productPage.getProductNameOnProductPage().equals(nameProductCategory));
+    }
+
+    @Test
+    public void testAddProductToCartPage(){
+        testAccessOneProductPageInTShirts();
+
+        ProductPage productPage = new ProductPage();
+        CartPage cart = new CartPage();
+
+        String nameProductOnProductPage = productPage.getProductNameOnProductPage();
+
+        productPage.clickButtonAddToCart();
+
+        productPage.clickButtonModalProceedToCheckout();
+
+        assertTrue(cart.getNameProductCart().equals(nameProductOnProductPage));
     }
 }

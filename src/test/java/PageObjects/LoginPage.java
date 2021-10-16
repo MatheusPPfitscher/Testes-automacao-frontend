@@ -23,4 +23,12 @@ public class LoginPage extends LoginPageElementMapper {
     public void clickBtnSubmitLogin() {
         SubmitLogin.click();
     }
+
+    public String getPage_Heading() {
+        return page_heading.getText();
+    }
+
+    public boolean isInMyAccountPage() {
+        return getPage_Heading().equals("MY ACCOUNT");
+    }
 }
