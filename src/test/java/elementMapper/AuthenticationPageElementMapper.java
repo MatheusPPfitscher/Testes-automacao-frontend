@@ -1,2 +1,17 @@
-package elementMapper;public class AuthenticationPageElementMapper {
+package elementMapper;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class AuthenticationPageElementMapper {
+
+    public WebElement email;
+
+    public WebElement passwd;
+
+    @FindBy(id = "SubmitLogin")
+    public WebElement buttonSubmitSignIn;
+
+    @FindBy(className = "page-heading")
+    public WebElement pageHeading;
 }

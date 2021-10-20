@@ -9,7 +9,7 @@ public class BaseTests {
 
     @Before
     public void setup(){
-        Browser.loadPage(Utils.getBaseUril());
+        Browser.loadPage(Utils.getBaseUrl());
     }
 
     @After

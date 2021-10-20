@@ -9,8 +9,15 @@ public class LoginPageElementMapper {
 
     public WebElement passwd;
 
-    public WebElement SubmitLogin;
+    @FindBy(id = "SubmitLogin")
+    public WebElement buttonSubmitSignIn;
 
     @FindBy(className = "page-heading")
-    public WebElement page_heading;
+    public WebElement pageHeading;
+
+    @FindBy(id = "email_create")
+    public WebElement formEmailCreateAccount;
+
+    @FindBy(id = "SubmitCreate")
+    public WebElement buttonSubmitCreateAccount;
 }

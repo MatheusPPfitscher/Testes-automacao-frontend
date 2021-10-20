@@ -1,7 +1,6 @@
 package PageObjects;
 
 import elementMapper.LoginPageElementMapper;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import utils.Browser;
 
@@ -11,24 +10,26 @@ public class LoginPage extends LoginPageElementMapper {
         PageFactory.initElements(Browser.getCurrentDriver(), this);
     }
 
-    public void fillEmail(){
-        email.sendKeys("cwireset2021_matheus@teste.com");
+    public void fillEmail(String emailLogin){
+        email.sendKeys(emailLogin);
     }
 
-    public void fillPasswd(){
-        passwd.sendKeys("cwireset");
-
+    public void fillPassword(String passwordLogin){
+        passwd.sendKeys(passwordLogin);
     }
 
-    public void clickBtnSubmitLogin() {
-        SubmitLogin.click();
+    public void fillEmailCreateAccount(String emailToCreateAccount){
+        formEmailCreateAccount.sendKeys(emailToCreateAccount);
     }
 
-    public String getPage_Heading() {
-        return page_heading.getText();
+    public void clickButtonCreateAccount() {buttonSubmitCreateAccount.click();}
+
+    public void clickButtonSubmitSignIn() {
+        buttonSubmitSignIn.click();
     }
 
     public boolean isInMyAccountPage() {
-        return getPage_Heading().equals("MY ACCOUNT");
+        return pageHeading.getText().equalsIgnoreCase("My account");
     }
+
 }
